@@ -69,9 +69,13 @@ public class SmsReceiver extends CordovaPlugin {
                     Log.e("SmsReceiver: " + msgBody, msgFromAddress);
                     
                     JSONObject obj = new JSONObject();
-                    obj.put("msg", msgBody);
-                	obj.put("sender", msgFromAddress);
-                    ctx.success(obj);
+                    try {
+						obj.put("msg", msgBody);
+						obj.put("sender", msgFromAddress);
+						ctx.success(obj);
+					} catch (JSONException e) {
+						e.printStackTrace();
+					} 
                 }
 
             }
