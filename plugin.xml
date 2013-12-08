@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<plugin xmlns="http://www.phonegap.com/ns/plugins/1.0"
+      id="com.blessanmathew.smsreceiver"
+      version="0.1.0">
+    <name>SmsReceiver</name>
+    <description>Phonegap plugin to read incoming sms messages.</description>
+    <license>MIT</license>
+    <keywords>phonegap,sms</keywords>
+
+
+    <js-module src="www/smsreceiver.js" name="SmsReceiver">
+        <clobbers target="window.smsreceiver" />
+    </js-module>
+
+    <!-- android -->
+    <platform name="android">        
+        <config-file target="AndroidManifest.xml" parent="/manifest">
+		    <uses-permission android:name="android.permission.RECEIVE_SMS" />
+		</config-file>
+
+        <source-file src="src/android/SmsReceiver.java" target-dir="src/com/blessanmathew/smsreceiver" />      
+     </platform>          
+</plugin>
