@@ -37,7 +37,10 @@ public class SmsReceiver extends CordovaPlugin {
         } catch(Exception e) {
             callbackContext.error(e.getMessage());
             return false;
-        } 
+        }
+				
+				callbackContext.error("Invalid action");
+        return true;
     }
     
     public class SmsBroadcastReceiver extends BroadcastReceiver {
