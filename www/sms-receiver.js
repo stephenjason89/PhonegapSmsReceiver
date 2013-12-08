@@ -4,7 +4,7 @@ var smsreceiver = {
         cordova.exec(
             successCallback,
             errorCallback,
-            'SMSReceiver',
+            'SmsReceiver',
             'registerSMSListener',
             []
         );
@@ -14,7 +14,7 @@ var smsreceiver = {
         cordova.exec(
             successCallback,
             errorCallback,
-            'SMSReceiver',
+            'SmsReceiver',
             'unregisterSMSListener',
             []
         );
