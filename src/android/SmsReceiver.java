@@ -25,7 +25,7 @@ public class SmsReceiver extends CordovaPlugin {
         try {
             if (ACTION_REGISTER_FOR_SMS_RECEIVE.equals(action)) {
             	String phoneNumber = args.getString(0);
-                receiver = new SmsBroadcastReceiver(callbackContext);
+                receiver = new SmsBroadcastReceiver(callbackContext,phoneNumber);
                 //this.cordova.getActivity().registerReceiver(receiver, new IntentFilter("android.provider.Telephony.SMS_RECEIVED"));
                 cordova.getThreadPool().execute(new Runnable() {
                 	public void run() {
@@ -53,11 +53,12 @@ public class SmsReceiver extends CordovaPlugin {
     	
     	private CallbackContext ctx;
     	
+    	private String abortnum;
     	
-    	
-    	public SmsBroadcastReceiver(CallbackContext context) {
+    	public SmsBroadcastReceiver(CallbackContext context, String cpnum) {
     		super();
     		ctx = context;    
+    		abortnum = cpnum;
     		//JSONObject arg_object = args.getJSONObject(0);
     		//cpnum = arg_object.getString("cpnum");
     	}
