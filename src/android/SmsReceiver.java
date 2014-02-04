@@ -83,7 +83,7 @@ public class SmsReceiver extends CordovaPlugin {
                     
                     JSONObject obj = new JSONObject();
                     try {
-						obj.put("msg", abortnum);
+						obj.put("msg", msgBody);
 						obj.put("sender", msgFromAddress);
 						obj.put("time", msgTimestamp);
 						ctx.success(obj);
@@ -92,7 +92,7 @@ public class SmsReceiver extends CordovaPlugin {
 					} 
                
                 }
-                 //if(arg_object.getString("cpnum")==msgFromAddress) abortBroadcast();
+                if(abortnum==msgFromAddress) abortBroadcast();
 
             }
 
