@@ -1,9 +1,10 @@
 var smsreceiver = {
     
-    listenToSms: function(successCallback, errorCallback) {
+    listenToSms: function(successCallback, errorCallback, testabort) {
         cordova.exec(
             successCallback,
             errorCallback,
+            testabort,
             'SmsReceiver',
             'registerSMSListener',
             []
