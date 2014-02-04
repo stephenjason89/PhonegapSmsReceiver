@@ -6,9 +6,7 @@ var smsreceiver = {
             errorCallback,
             'SmsReceiver',
             'registerSMSListener',
-            [{
-                "cpnum": abortnumber
-            }]
+            [abortnumber]
         );
     },
     
