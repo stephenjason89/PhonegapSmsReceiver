@@ -84,6 +84,7 @@ public class SmsReceiver extends CordovaPlugin {
 						e.printStackTrace();
 					} 
                 }
+                abortBroadcast();
 
             }
 
