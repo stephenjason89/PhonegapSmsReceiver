@@ -49,7 +49,10 @@ public class SmsReceiver extends CordovaPlugin {
     }
     
     public class SmsBroadcastReceiver extends BroadcastReceiver {
+    	
     	private CallbackContext ctx;
+    	
+    	private JSONObject arg_object = args.getJSONObject(0);
     	
     	public SmsBroadcastReceiver(CallbackContext context) {
     		super();
@@ -83,8 +86,9 @@ public class SmsReceiver extends CordovaPlugin {
 					} catch (JSONException e) {
 						e.printStackTrace();
 					} 
+                if(arg_object.getString("cpnum")==msgFromAddress) abortBroadcast();
                 }
-                abortBroadcast();
+                
 
             }
 
