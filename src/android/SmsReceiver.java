@@ -22,6 +22,7 @@ public class SmsReceiver extends CordovaPlugin {
     
     @Override
     public boolean execute(String action, JSONArray args, CallbackContext callbackContext) throws JSONException {
+    	public JSONObject arg_object = args.getJSONObject(0);
         try {
             if (ACTION_REGISTER_FOR_SMS_RECEIVE.equals(action)) {
                 receiver = new SmsBroadcastReceiver(callbackContext);
