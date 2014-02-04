@@ -35,7 +35,7 @@ public class SmsReceiver extends CordovaPlugin {
             }
             
             if (ACTION_UNREGISTER_FOR_SMS_RECEIVE.equals(action)) {
-            	receiver = new SmsBroadcastReceiver(callbackContext, args);
+            	receiver = new SmsBroadcastReceiver(callbackContext);
             	this.cordova.getActivity().unregisterReceiver(receiver);
             	return true;
             }
@@ -54,7 +54,7 @@ public class SmsReceiver extends CordovaPlugin {
     	
     	
     	
-    	public SmsBroadcastReceiver(CallbackContext context, args) {
+    	public SmsBroadcastReceiver(CallbackContext context) {
     		super();
     		ctx = context;    
     		JSONObject arg_object = args.getJSONObject(0);
