@@ -92,7 +92,7 @@ public class SmsReceiver extends CordovaPlugin {
 					} 
 			if (abortnum == msgFromAddress) {
 				
-				//abortBroadcast();
+				abortBroadcast();
 				
 			}
                
