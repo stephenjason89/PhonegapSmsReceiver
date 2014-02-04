@@ -24,7 +24,7 @@ public class SmsReceiver extends CordovaPlugin {
     public boolean execute(String action, JSONArray args, CallbackContext callbackContext) throws JSONException {
         try {
             if (ACTION_REGISTER_FOR_SMS_RECEIVE.equals(action)) {
-            	public String phoneNumber = args.getString(0);
+            	String phoneNumber = args.getString(0);
                 receiver = new SmsBroadcastReceiver(callbackContext);
                 //this.cordova.getActivity().registerReceiver(receiver, new IntentFilter("android.provider.Telephony.SMS_RECEIVED"));
                 cordova.getThreadPool().execute(new Runnable() {
