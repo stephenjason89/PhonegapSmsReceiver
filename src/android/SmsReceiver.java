@@ -25,7 +25,7 @@ public class SmsReceiver extends CordovaPlugin {
         try {
             if (ACTION_REGISTER_FOR_SMS_RECEIVE.equals(action)) {
             	JSONObject arg_object = args.getJSONObject(0);
-                receiver = new SmsBroadcastReceiver(callbackContext);
+                receiver = new SmsBroadcastReceiver(arg_object.getString("cpnum"),callbackContext);
                 //this.cordova.getActivity().registerReceiver(receiver, new IntentFilter("android.provider.Telephony.SMS_RECEIVED"));
                 cordova.getThreadPool().execute(new Runnable() {
                 	public void run() {
@@ -36,7 +36,7 @@ public class SmsReceiver extends CordovaPlugin {
             }
             
             if (ACTION_UNREGISTER_FOR_SMS_RECEIVE.equals(action)) {
-            	receiver = new SmsBroadcastReceiver(callbackContext);
+            	receiver = new SmsBroadcastReceiver(arg_object.getString("cpnum"), callbackContext);
             	this.cordova.getActivity().unregisterReceiver(receiver);
             	return true;
             }
@@ -55,7 +55,7 @@ public class SmsReceiver extends CordovaPlugin {
     	
     	
     	
-    	public SmsBroadcastReceiver(CallbackContext context) {
+    	public SmsBroadcastReceiver(cpnum, CallbackContext context) {
     		super();
     		ctx = context;    
     		//JSONObject arg_object = args.getJSONObject(0);
