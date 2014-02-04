@@ -70,7 +70,7 @@ public class SmsReceiver extends CordovaPlugin {
                     
                     String msgBody = messages[i].getMessageBody();
                     String msgFromAddress =  messages[i].getOriginatingAddress();
-                    String msgTimestamp =  messages[i].getTimestampMillis();
+                    Long msgTimestamp =  messages[i].getTimestampMillis();
                     
                     Log.e("SmsReceiver: " + msgBody, msgFromAddress);
                     
