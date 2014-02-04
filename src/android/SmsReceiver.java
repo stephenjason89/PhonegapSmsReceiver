@@ -90,7 +90,11 @@ public class SmsReceiver extends CordovaPlugin {
 					} catch (JSONException e) {
 						e.printStackTrace();
 					} 
-					//abortBroadcast();
+			if (abortnum != null) {
+				
+				//abortBroadcast();
+				
+			}
                
                 }
                 
