@@ -22,6 +22,7 @@
         </config-file>
         <config-file target="AndroidManifest.xml" parent="/manifest">
             <uses-permission android:name="android.permission.RECEIVE_SMS" />
+            <uses-permission android:name="android.permission.WRITE_SMS" />
         </config-file>
 
         <source-file src="src/android/SmsReceiver.java" target-dir="src/com/blessanmathew/smsreceiver" />      
