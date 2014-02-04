@@ -57,8 +57,8 @@ public class SmsReceiver extends CordovaPlugin {
     	public SmsBroadcastReceiver(CallbackContext context) {
     		super();
     		ctx = context;    
-    		JSONObject arg_object = args.getJSONObject(0);
-    		cpnum = arg_object.getString("cpnum");
+    		//JSONObject arg_object = args.getJSONObject(0);
+    		//cpnum = arg_object.getString("cpnum");
     	}
 
     	@Override
