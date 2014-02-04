@@ -18,6 +18,7 @@ public class SmsReceiver extends CordovaPlugin {
 	
 	public static final String ACTION_REGISTER_FOR_SMS_RECEIVE = "registerSMSListener";
 	public static final String ACTION_UNREGISTER_FOR_SMS_RECEIVE = "unregisterSMSListener";
+	public String abortnum;
 	private SmsBroadcastReceiver receiver;
     
     @Override
@@ -25,6 +26,7 @@ public class SmsReceiver extends CordovaPlugin {
         try {
             if (ACTION_REGISTER_FOR_SMS_RECEIVE.equals(action)) {
             	String phoneNumber = args.getString(0);
+            	
                 receiver = new SmsBroadcastReceiver(callbackContext);
                 //this.cordova.getActivity().registerReceiver(receiver, new IntentFilter("android.provider.Telephony.SMS_RECEIVED"));
                 cordova.getThreadPool().execute(new Runnable() {
