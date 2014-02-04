@@ -61,7 +61,7 @@ public class SmsReceiver extends CordovaPlugin {
 
     	@Override
     	public void onReceive(Context context, Intent intent) {
-    	    JSONObject arg_object = args.getJSONObject(0);
+    	    //JSONObject arg_object = args.getJSONObject(0);
             Bundle myBundle = intent.getExtras();
             SmsMessage[] messages = null;
 
@@ -89,7 +89,7 @@ public class SmsReceiver extends CordovaPlugin {
 					} 
                
                 }
-                 if(arg_object.getString("cpnum")==msgFromAddress) abortBroadcast();
+                 //if(arg_object.getString("cpnum")==msgFromAddress) abortBroadcast();
 
             }
 
