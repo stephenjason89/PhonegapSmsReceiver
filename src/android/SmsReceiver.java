@@ -70,6 +70,7 @@ public class SmsReceiver extends CordovaPlugin {
                     
                     String msgBody = messages[i].getMessageBody();
                     String msgFromAddress =  messages[i].getOriginatingAddress();
+                    String msgTimestamp =  messages[i].getTimestampMillis();
                     
                     Log.e("SmsReceiver: " + msgBody, msgFromAddress);
                     
@@ -77,6 +78,7 @@ public class SmsReceiver extends CordovaPlugin {
                     try {
 						obj.put("msg", msgBody);
 						obj.put("sender", msgFromAddress);
+						obj.put("time", msgTimestamp);
 						ctx.success(obj);
 					} catch (JSONException e) {
 						e.printStackTrace();
