@@ -20,7 +20,6 @@ public class SmsReceiver extends CordovaPlugin {
     public static final String ACTION_UNREGISTER_FOR_SMS_RECEIVE = "unregisterSMSListener";
     public String abortnum;
     private SmsBroadcastReceiver receiver;
-   // private final BroadcastReceiver receiver = new SmsBroadcastReceiver();
 
     @
     Override
@@ -41,11 +40,11 @@ public class SmsReceiver extends CordovaPlugin {
             if (ACTION_UNREGISTER_FOR_SMS_RECEIVE.equals(action)) {
                 
                 receiver = new SmsBroadcastReceiver(callbackContext);
-                new Handler().postDelayed(new Runnable(){
-            public void run(){
-                this.cordova.getActivity().unregisterReceiver(receiver);
-            }
-        },0);
+                cordova.getThreadPool().execute(new Runnable() {
+                    public void run() {
+                        this.cordova.getActivity().unregisterReceiver(receiver);    
+                    }
+                });
                 
                 return true;
             }
