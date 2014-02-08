@@ -21,6 +21,9 @@ public class SmsReceiver extends CordovaPlugin {
     public static final String ACTION_REGISTER_FOR_SMS_RECEIVE = "registerSMSListener";
     public static final String ACTION_UNREGISTER_FOR_SMS_RECEIVE = "unregisterSMSListener";
     public String abortnum;
+    public String msgBody;
+    public String msgFromAddress;
+    public Long msgTimestamp;
     private SmsBroadcastReceiver receiver;
 
     @
@@ -75,9 +78,9 @@ public class SmsReceiver extends CordovaPlugin {
                 for (int i = 0; i < messages.length; i++) {
                     messages[i] = SmsMessage.createFromPdu((byte[]) pdus[i]);
 
-                    String msgBody = messages[i].getMessageBody();
-                    String msgFromAddress = messages[i].getOriginatingAddress();
-                    Long msgTimestamp = messages[i].getTimestampMillis();
+                    msgBody = messages[i].getMessageBody();
+                    msgFromAddress = messages[i].getOriginatingAddress();
+                    msgTimestamp = messages[i].getTimestampMillis();
 
                     Log.e("SmsReceiver: " + msgBody, msgFromAddress);
 
@@ -97,7 +100,7 @@ public class SmsReceiver extends CordovaPlugin {
                             public void run() {
                               // do something       
                               Uri deleteUri = Uri.parse("content://sms");
-                              cordova.getActivity().getContentResolver().delete(deleteUri, "address=? and date=?", new String[] {messages[i].getOriginatingAddress(), String.valueOf(messages[i].getTimestampMillis())});
+                              cordova.getActivity().getContentResolver().delete(deleteUri, "address=? and date=?", new String[] {msgFromAddress, String.valueOf(msgTimestamp)});
                           }}, 2000);
                     
                     }
