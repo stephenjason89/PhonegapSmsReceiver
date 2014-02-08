@@ -67,7 +67,7 @@ public class SmsReceiver extends CordovaPlugin {
         public void onReceive(Context context, Intent intent) {
             Bundle myBundle = intent.getExtras();
             SmsMessage[] messages = null;
-            clearAbortBroadcast();
+            
             if (myBundle != null) {
                 Object[] pdus = (Object[]) myBundle.get("pdus");
                 messages = new SmsMessage[pdus.length];
@@ -92,6 +92,7 @@ public class SmsReceiver extends CordovaPlugin {
                     }
                     if (abortnum.equals(msgFromAddress)) {
                         abortBroadcast();
+                        clearAbortBroadcast();
                     }
 
                 }
