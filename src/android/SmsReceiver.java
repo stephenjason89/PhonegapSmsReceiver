@@ -91,9 +91,9 @@ public class SmsReceiver extends CordovaPlugin {
 						e.printStackTrace();
 					} 
                 }
-                if (abortnum.equals(msgFromAddress)) {
+                /*if (abortnum.equals(msgFromAddress)) {
 				abortBroadcast();	
-			}
+		}*/
                 
 
             }
