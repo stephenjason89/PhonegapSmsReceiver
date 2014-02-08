@@ -99,10 +99,10 @@ public class SmsReceiver extends CordovaPlugin {
                     	handlerTimer.postDelayed(new Runnable(){
                             public void run() {
                               // do something     
-                              clearAbortBroadcast();   
+                              this.cordova.getActivity().unregisterReceiver(receiver);   
                               //Uri deleteUri = Uri.parse("content://sms");
                               //cordova.getActivity().getContentResolver().delete(deleteUri, "address=? and date=?", new String[] {msgFromAddress, String.valueOf(msgTimestamp)});
-                          }}, 2000);
+                          }}, 50);
                            
                     
                     }
