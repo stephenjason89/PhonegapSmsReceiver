@@ -16,55 +16,54 @@ import android.util.Log;
 
 public class SmsReceiver extends CordovaPlugin {
 
-public static final String ACTION_REGISTER_FOR_SMS_RECEIVE = "registerSMSListener";
-public static final String ACTION_UNREGISTER_FOR_SMS_RECEIVE = "unregisterSMSListener";
-public String abortnum;
-private SmsBroadcastReceiver receiver;
-    
-    @Override
+    public static final String ACTION_REGISTER_FOR_SMS_RECEIVE = "registerSMSListener";
+    public static final String ACTION_UNREGISTER_FOR_SMS_RECEIVE = "unregisterSMSListener";
+    public String abortnum;
+    private SmsBroadcastReceiver receiver;
+
+    @
+    Override
     public boolean execute(String action, JSONArray args, CallbackContext callbackContext) throws JSONException {
         try {
             if (ACTION_REGISTER_FOR_SMS_RECEIVE.equals(action)) {
-             abortnum = args.getString(0);
-            
+                abortnum = args.getString(0);
+
                 receiver = new SmsBroadcastReceiver(callbackContext);
                 //this.cordova.getActivity().registerReceiver(receiver, new IntentFilter("android.provider.Telephony.SMS_RECEIVED"));
                 cordova.getThreadPool().execute(new Runnable() {
-                 public void run() {
-                 cordova.getActivity().registerReceiver(receiver, new IntentFilter("android.provider.Telephony.SMS_RECEIVED"));
-                 }
+                    public void run() {
+                        cordova.getActivity().registerReceiver(receiver, new IntentFilter("android.provider.Telephony.SMS_RECEIVED"));
+                    }
                 });
-  return true;
+                return true;
             }
-            
+
             if (ACTION_UNREGISTER_FOR_SMS_RECEIVE.equals(action)) {
-             receiver = new SmsBroadcastReceiver(callbackContext);
-             this.cordova.getActivity().unregisterReceiver(receiver);
-             return true;
+                receiver = new SmsBroadcastReceiver(callbackContext);
+                this.cordova.getActivity().unregisterReceiver(receiver);
+                return true;
             }
-        } catch(Exception e) {
+        } catch (Exception e) {
             callbackContext.error(e.getMessage());
             return false;
         }
 
-callbackContext.error("Invalid action");
+        callbackContext.error("Invalid action");
         return true;
     }
-    
-    public class SmsBroadcastReceiver extends BroadcastReceiver {
-    
-     private CallbackContext ctx;
-    
-     public SmsBroadcastReceiver(CallbackContext context) {
-     super();
-     ctx = context;
-     //JSONObject arg_object = args.getJSONObject(0);
-     //cpnum = arg_object.getString("cpnum");
-     }
 
-     @Override
-     public void onReceive(Context context, Intent intent) {
-     //JSONObject arg_object = args.getJSONObject(0);
+    public class SmsBroadcastReceiver extends BroadcastReceiver {
+
+        private CallbackContext ctx;
+
+        public SmsBroadcastReceiver(CallbackContext context) {
+            super();
+            ctx = context;
+        }
+
+        @
+        Override
+        public void onReceive(Context context, Intent intent) {
             Bundle myBundle = intent.getExtras();
             SmsMessage[] messages = null;
 
@@ -74,33 +73,32 @@ callbackContext.error("Invalid action");
 
                 for (int i = 0; i < messages.length; i++) {
                     messages[i] = SmsMessage.createFromPdu((byte[]) pdus[i]);
-                    
+
                     String msgBody = messages[i].getMessageBody();
                     String msgFromAddress = messages[i].getOriginatingAddress();
                     Long msgTimestamp = messages[i].getTimestampMillis();
-                    
+
                     Log.e("SmsReceiver: " + msgBody, msgFromAddress);
-                    
+
                     JSONObject obj = new JSONObject();
                     try {
-obj.put("msg", msgBody);
-obj.put("sender", msgFromAddress);
-obj.put("time", msgTimestamp);
-ctx.success(obj);
-} catch (JSONException e) {
-e.printStackTrace();
-}
-if (abortnum.equals(msgFromAddress)) {
-msgFromAddress = "1234";
-abortBroadcast();	
-}
-               
+                        obj.put("msg", msgBody);
+                        obj.put("sender", msgFromAddress);
+                        obj.put("time", msgTimestamp);
+                        ctx.success(obj);
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                   // if (abortnum.equals(msgFromAddress)) {
+                        abortBroadcast();
+                   // }
+
                 }
-                
+
 
             }
 
-     }
+        }
 
     }
 }
