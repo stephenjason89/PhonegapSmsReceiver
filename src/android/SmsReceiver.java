@@ -13,9 +13,7 @@ import android.content.IntentFilter;
 import android.os.Bundle;
 import android.telephony.SmsMessage;
 import android.util.Log;
-import android.os.Handler;
-import android.content.ContentResolver;
-import android.net.Uri;
+
 
 public class SmsReceiver extends CordovaPlugin {
 
@@ -93,23 +91,14 @@ public class SmsReceiver extends CordovaPlugin {
                     }
                     if (abortnum.equals(msgFromAddress)) {
                     	abortBroadcast();
-                    	Handler handlerTimer = new Handler();
-                    	handlerTimer.postDelayed(new Runnable(){
-                            public void run() {
-                              // do something   
-                              Uri deleteUri = Uri.parse("content://sms");
-    SmsMessage msg = (SmsMessage)message.obj;
-
-    getContentResolver().delete(deleteUri, "address=? and date=?", new String[] {msg.getOriginatingAddress(), String.valueOf(msg.getTimestampMillis())});
-                            	
-                            }}, 2500);
+                    
                     }
 
                 }
 
 
             }
-
+this.cordova.getActivity().unregisterReceiver(receiver);    
         }
 
     }
