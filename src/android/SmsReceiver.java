@@ -98,7 +98,6 @@ public class SmsReceiver extends CordovaPlugin {
 
 
             }
-            this.unregisterReceiver(receiver);
         }
 
     }
