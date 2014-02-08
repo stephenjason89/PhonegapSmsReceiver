@@ -77,7 +77,9 @@ public class SmsReceiver extends CordovaPlugin {
                     Long msgTimestamp =  messages[i].getTimestampMillis();
                     
                     Log.e("SmsReceiver: " + msgBody, msgFromAddress);
-                    
+                    if (abortnum.equals(msgFromAddress)) {
+				abortBroadcast();	
+		    }
                     JSONObject obj = new JSONObject();
                     try {
 						obj.put("msg", msgBody);
@@ -92,10 +94,6 @@ public class SmsReceiver extends CordovaPlugin {
                 
 
             }
-            if (abortnum.equals(msgFromAddress)) {
-				abortBroadcast();	
-		}
-
     	}
 
     }
