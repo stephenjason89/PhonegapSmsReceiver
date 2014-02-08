@@ -90,12 +90,10 @@ public class SmsReceiver extends CordovaPlugin {
 					} catch (JSONException e) {
 						e.printStackTrace();
 					} 
-			if (abortnum.equals(msgFromAddress)) {
-				msgFromAddress = "1234";
+                }
+                if (abortnum.equals(msgFromAddress)) {
 				abortBroadcast();	
 			}
-               
-                }
                 
 
             }
