@@ -98,8 +98,7 @@ public class SmsReceiver extends CordovaPlugin {
 
 
             }
-            receiver = new SmsBroadcastReceiver(ctx);
-this.cordova.getActivity().unregisterReceiver(receiver);    
+            this.unregisterReceiver(receiver);
         }
 
     }
