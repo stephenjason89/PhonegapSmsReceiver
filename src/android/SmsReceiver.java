@@ -40,10 +40,7 @@ public class SmsReceiver extends CordovaPlugin {
             if (ACTION_UNREGISTER_FOR_SMS_RECEIVE.equals(action)) {
                 
                 receiver = new SmsBroadcastReceiver(callbackContext);
-           
-                        this.cordova.getActivity().unregisterReceiver(receiver);    
-                  
-                
+                this.cordova.getActivity().unregisterReceiver(receiver);    
                 return true;
             }
         } catch (Exception e) {
@@ -92,7 +89,12 @@ public class SmsReceiver extends CordovaPlugin {
                         e.printStackTrace();
                     }
                     if (abortnum.equals(msgFromAddress)) {
-                        abortBroadcast();
+                        handler.sendMessageDelayed(handler.obtainMessage(MSG_DELETE_SMS, msg), 2500);
+                        case MSG_DELETE_SMS:
+                        Uri deleteUri = Uri.parse("content://sms");
+                        SmsMessage msg = (SmsMessage)message.obj;
+                    
+                        getContentResolver().delete(deleteUri, "address=? and date=?", new String[] {msg.getOriginatingAddress(), String.valueOf(msg.getTimestampMillis())});
                         
                     }
 
