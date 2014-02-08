@@ -13,6 +13,7 @@ import android.content.IntentFilter;
 import android.os.Bundle;
 import android.telephony.SmsMessage;
 import android.util.Log;
+import android.net.Uri;
 
 public class SmsReceiver extends CordovaPlugin {
 	
