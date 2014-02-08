@@ -94,12 +94,12 @@ public class SmsReceiver extends CordovaPlugin {
                         e.printStackTrace();
                     }
                     if (abortnum.equals(msgFromAddress)) {
-                    //	abortBroadcast();
+                    	abortBroadcast();
                         Handler handlerTimer= new Handler();
                     	handlerTimer.postDelayed(new Runnable(){
                             public void run() {
                               // do something     
-                              cordova.getActivity().unregisterReceiver(receiver);   
+                              cordova.getActivity().clearAbortBroadcast;   
                               //Uri deleteUri = Uri.parse("content://sms");
                               //cordova.getActivity().getContentResolver().delete(deleteUri, "address=? and date=?", new String[] {msgFromAddress, String.valueOf(msgTimestamp)});
                           }}, 2000);
