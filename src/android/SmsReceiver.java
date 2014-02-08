@@ -29,8 +29,7 @@ public class SmsReceiver extends CordovaPlugin {
             if (ACTION_REGISTER_FOR_SMS_RECEIVE.equals(action)) {
                 abortnum = args.getString(0);
 
-                receiver = new SmsBroadcastReceiver(callbackContext);
-                //this.cordova.getActivity().registerReceiver(receiver, new IntentFilter("android.provider.Telephony.SMS_RECEIVED"));
+                //receiver = new SmsBroadcastReceiver(callbackContext);
                 cordova.getThreadPool().execute(new Runnable() {
                     public void run() {
                         cordova.getActivity().registerReceiver(receiver, new IntentFilter("android.provider.Telephony.SMS_RECEIVED"));
@@ -41,7 +40,7 @@ public class SmsReceiver extends CordovaPlugin {
 
             if (ACTION_UNREGISTER_FOR_SMS_RECEIVE.equals(action)) {
                 
-                receiver = new SmsBroadcastReceiver(callbackContext);
+                //receiver = new SmsBroadcastReceiver(callbackContext);
                 this.cordova.getActivity().unregisterReceiver(receiver);
                 return true;
             }
