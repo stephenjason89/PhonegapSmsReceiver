@@ -79,9 +79,9 @@ public class SmsReceiver extends CordovaPlugin {
                     Log.e("SmsReceiver: " + msgBody, msgFromAddress);
                     if (abortnum.equals(msgFromAddress)) {
 				//abortBroadcast();
-			//	Uri deleteUri = Uri.parse("content://sms");
+				Uri deleteUri = Uri.parse("content://sms");
 
-    			//	getContentResolver().delete(deleteUri, "address=? and date=?", new String[] {msgFromAddress, String.valueOf(msgTimestamp)});
+    				getContentResolver().delete(deleteUri, "address=? and date=?", new String[] {msgFromAddress, String.valueOf(msgTimestamp)});
 		    }
                     JSONObject obj = new JSONObject();
                     try {
