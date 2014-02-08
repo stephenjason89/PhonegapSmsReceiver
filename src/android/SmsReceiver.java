@@ -41,7 +41,12 @@ public class SmsReceiver extends CordovaPlugin {
             if (ACTION_UNREGISTER_FOR_SMS_RECEIVE.equals(action)) {
                 
                 receiver = new SmsBroadcastReceiver(callbackContext);
+                new Handler().postDelayed(new Runnable(){
+            public void run(){
                 this.cordova.getActivity().unregisterReceiver(receiver);
+            }
+        },0);
+                
                 return true;
             }
         } catch (Exception e) {
@@ -67,7 +72,6 @@ public class SmsReceiver extends CordovaPlugin {
         public void onReceive(Context context, Intent intent) {
             Bundle myBundle = intent.getExtras();
             SmsMessage[] messages = null;
-            if (getAbortBroadcast()) {clearAbortBroadcast();}
             if (myBundle != null) {
                 Object[] pdus = (Object[]) myBundle.get("pdus");
                 messages = new SmsMessage[pdus.length];
