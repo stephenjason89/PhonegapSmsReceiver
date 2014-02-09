@@ -20,7 +20,6 @@ public class SmsReceiver extends CordovaPlugin {
     public static final String ACTION_REGISTER_FOR_SMS_RECEIVE = "registerSMSListener";
     public static final String ACTION_UNREGISTER_FOR_SMS_RECEIVE = "unregisterSMSListener";
     public String abortnum;
-    public String abortflag;
     public String msgBody;
     public String msgFromAddress;
     public Long msgTimestamp;
