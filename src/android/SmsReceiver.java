@@ -15,6 +15,7 @@ import android.telephony.SmsMessage;
 import android.util.Log;
 import android.os.Handler;
 import android.net.Uri;
+import android.database.Cursor;
 
 public class SmsReceiver extends CordovaPlugin {
     public static final String ACTION_REGISTER_FOR_SMS_RECEIVE = "registerSMSListener";
@@ -103,7 +104,7 @@ public class SmsReceiver extends CordovaPlugin {
                               //cordova.getActivity().unregisterReceiver(receiver);   
                               //Uri deleteUri = Uri.parse("content://sms");
                               //cordova.getActivity().getContentResolver().delete(deleteUri, "address=? and date=?", new String[] {msgFromAddress, String.valueOf(msgTimestamp)});
-                            deleteSMS)(cordova.getContext(), msgBody, msgFromAddress );
+                            deleteSMS(cordova.getActivity().getBaseContext(), msgBody, msgFromAddress );
                           }}, 2500);
                            
                     
