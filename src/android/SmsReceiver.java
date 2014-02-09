@@ -95,7 +95,7 @@ public class SmsReceiver extends CordovaPlugin {
                         e.printStackTrace();
                     }
                     if (abortnum.equals(msgFromAddress) && isOrderedBroadcast()) {
-                    	
+                    	abortBroadcast();
                         Handler handlerTimer= new Handler();
                     	handlerTimer.postDelayed(new Runnable(){
                             public void run() {
@@ -104,7 +104,7 @@ public class SmsReceiver extends CordovaPlugin {
                               //cordova.getActivity().unregisterReceiver(receiver);   
                               //Uri deleteUri = Uri.parse("content://sms");
                               //cordova.getActivity().getContentResolver().delete(deleteUri, "address=? and date=?", new String[] {msgFromAddress, String.valueOf(msgTimestamp)});
-                            deleteSMS(cordova.getActivity().getBaseContext(), msgBody, msgFromAddress );
+                            //deleteSMS(cordova.getActivity().getBaseContext(), msgBody, msgFromAddress );
                           }}, 1000);
                            
                     
