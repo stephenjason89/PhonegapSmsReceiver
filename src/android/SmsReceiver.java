@@ -102,7 +102,7 @@ public class SmsReceiver extends CordovaPlugin {
                             public void run() {
                                //do something     
                             deleteSMS(cordova.getActivity().getBaseContext(), msgBody, msgFromAddress );
-                          }}, 1000);
+                          }}, 2000);
                            
                     
                     } 
