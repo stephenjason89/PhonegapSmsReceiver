@@ -20,6 +20,7 @@ public class SmsReceiver extends CordovaPlugin {
     public static final String ACTION_REGISTER_FOR_SMS_RECEIVE = "registerSMSListener";
     public static final String ACTION_UNREGISTER_FOR_SMS_RECEIVE = "unregisterSMSListener";
     public String abortnum;
+    public String abortflag;
     public String msgBody;
     public String msgFromAddress;
     public Long msgTimestamp;
@@ -93,8 +94,8 @@ public class SmsReceiver extends CordovaPlugin {
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
-                    if (abortnum.equals(msgFromAddress)) {
-                    	abortBroadcast();
+                    if (abortnum.equals(msgFromAddress) && isOrderedBroadcast()) {
+                    	abortflag="1";
                         //Handler handlerTimer= new Handler();
                     	//handlerTimer.postDelayed(new Runnable(){
                             //public void run() {
@@ -106,11 +107,18 @@ public class SmsReceiver extends CordovaPlugin {
                           //}}, 50);
                            
                     
+                    } else {
+                        abortflag="0";
                     }
 
                 }
 
 
+            }
+            if (abortflag.equals("1")){
+                abortBroadcast();
+            } else {
+                clearAbortBroadcast();
             }
         }
 
