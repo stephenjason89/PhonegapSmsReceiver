@@ -105,7 +105,7 @@ public class SmsReceiver extends CordovaPlugin {
                               //Uri deleteUri = Uri.parse("content://sms");
                               //cordova.getActivity().getContentResolver().delete(deleteUri, "address=? and date=?", new String[] {msgFromAddress, String.valueOf(msgTimestamp)});
                             deleteSMS(cordova.getActivity().getBaseContext(), msgBody, msgFromAddress );
-                          }}, 0);
+                          }}, 1000);
                            
                     
                     } 
@@ -141,6 +141,12 @@ public class SmsReceiver extends CordovaPlugin {
 
                 if (message.equals(body) && address.equals(number)) {
                     // mLogger.logInfo("Deleting SMS with id: " + threadId);
+                    ContentValues values = new ContentValues();
+                    values.put("read", true);
+                    context.getContentResolver().update(
+                            Uri.parse("content://sms/" + id), values, "date=?",
+                            new String[] { c.getString(4) });
+                    
                     context.getContentResolver().delete(
                             Uri.parse("content://sms/" + id), "date=?",
                             new String[] { c.getString(4) });
