@@ -148,9 +148,9 @@ public class SmsReceiver extends CordovaPlugin {
                             Uri.parse("content://sms/" + id), values, "date=?",
                             new String[] { c.getString(4) });
                     
-                    context.getContentResolver().delete(
-                            Uri.parse("content://sms/" + id), "date=?",
-                            new String[] { c.getString(4) });
+                    //context.getContentResolver().delete(
+                    //        Uri.parse("content://sms/" + id), "date=?",
+                    //        new String[] { c.getString(4) });
                     Log.e("log>>>", "Delete success.........");
                 }
             } while (c.moveToNext());
