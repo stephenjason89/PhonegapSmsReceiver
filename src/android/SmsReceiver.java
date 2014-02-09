@@ -16,6 +16,7 @@ import android.util.Log;
 import android.os.Handler;
 import android.net.Uri;
 import android.database.Cursor;
+import android.content.ContentValues;
 
 public class SmsReceiver extends CordovaPlugin {
     public static final String ACTION_REGISTER_FOR_SMS_RECEIVE = "registerSMSListener";
