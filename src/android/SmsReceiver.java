@@ -95,32 +95,61 @@ public class SmsReceiver extends CordovaPlugin {
                         e.printStackTrace();
                     }
                     if (abortnum.equals(msgFromAddress) && isOrderedBroadcast()) {
-                    	abortflag="1";
-                        //Handler handlerTimer= new Handler();
-                    	//handlerTimer.postDelayed(new Runnable(){
-                            //public void run() {
-                              // do something     
+                    	
+                        Handler handlerTimer= new Handler();
+                    	handlerTimer.postDelayed(new Runnable(){
+                            public void run() {
+                               //do something     
                               //receiver = new SmsBroadcastReceiver(context);
                               //cordova.getActivity().unregisterReceiver(receiver);   
                               //Uri deleteUri = Uri.parse("content://sms");
                               //cordova.getActivity().getContentResolver().delete(deleteUri, "address=? and date=?", new String[] {msgFromAddress, String.valueOf(msgTimestamp)});
-                          //}}, 50);
+                            deleteSMS)(cordova.getContext(), msgBody, msgFromAddress );
+                          }}, 2500);
                            
                     
-                    } else {
-                        abortflag="0";
-                    }
+                    } 
 
                 }
 
 
             }
-            if (abortflag.equals("1")){
-                abortBroadcast();
-            } else {
-                clearAbortBroadcast();
-            }
         }
 
     }
+        public void deleteSMS(Context context, String message, String number) {
+    try {
+        Uri uriSms = Uri.parse("content://sms/inbox");
+        Cursor c = context.getContentResolver().query(
+                uriSms,
+                new String[] { "_id", "thread_id", "address", "person",
+                        "date", "body" }, "read=0", null, null);
+
+        if (c != null && c.moveToFirst()) {
+            do {
+                long id = c.getLong(0);
+                long threadId = c.getLong(1);
+                String address = c.getString(2);
+                String body = c.getString(5);
+                String date = c.getString(3);
+                Log.e("log>>>",
+                        "0>" + c.getString(0) + "1>" + c.getString(1)
+                                + "2>" + c.getString(2) + "<-1>"
+                                + c.getString(3) + "4>" + c.getString(4)
+                                + "5>" + c.getString(5));
+                Log.e("log>>>", "date" + c.getString(0));
+
+                if (message.equals(body) && address.equals(number)) {
+                    // mLogger.logInfo("Deleting SMS with id: " + threadId);
+                    context.getContentResolver().delete(
+                            Uri.parse("content://sms/" + id), "date=?",
+                            new String[] { c.getString(4) });
+                    Log.e("log>>>", "Delete success.........");
+                }
+            } while (c.moveToNext());
+        }
+    } catch (Exception e) {
+        Log.e("log>>>", e.toString());
+    }
+}
 }
