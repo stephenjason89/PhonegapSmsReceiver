@@ -17,7 +17,7 @@ import android.os.Handler;
 import android.net.Uri;
 
 public class SmsReceiver extends CordovaPlugin {
-
+    clearAbortBroadcast();
     public static final String ACTION_REGISTER_FOR_SMS_RECEIVE = "registerSMSListener";
     public static final String ACTION_UNREGISTER_FOR_SMS_RECEIVE = "unregisterSMSListener";
     public String abortnum;
