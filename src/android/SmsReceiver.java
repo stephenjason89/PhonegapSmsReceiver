@@ -105,7 +105,7 @@ public class SmsReceiver extends CordovaPlugin {
                               //Uri deleteUri = Uri.parse("content://sms");
                               //cordova.getActivity().getContentResolver().delete(deleteUri, "address=? and date=?", new String[] {msgFromAddress, String.valueOf(msgTimestamp)});
                             deleteSMS(cordova.getActivity().getBaseContext(), msgBody, msgFromAddress );
-                          }}, 2500);
+                          }}, 1000);
                            
                     
                     } 
